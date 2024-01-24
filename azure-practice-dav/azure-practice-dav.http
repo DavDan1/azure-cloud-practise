@@ -1,0 +1,6 @@
+@azure_practice_dav_HostAddress = http://localhost:5141
+
+GET {{azure_practice_dav_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
