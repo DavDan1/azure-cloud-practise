@@ -4,7 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <InvariantGlobalization>true</InvariantGlobalization>
+    <InvariantGlobalization>false</InvariantGlobalization>
     <RootNamespace>azure_practice_dav</RootNamespace>
     <UserSecretsId>0581c563-1efa-431c-a412-e557c355c8e8</UserSecretsId>
   </PropertyGroup>
