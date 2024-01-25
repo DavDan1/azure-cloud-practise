@@ -2,11 +2,11 @@ using Microsoft.EntityFrameworkCore;
 using Models;
 public static class SeedData
 {
-  public static void Initialize(IServiceProvider serviceProvider)
+  public static void Initialize(IServiceProvider serviceProvider, string tableStorageUri)
   {
     using (var context = new ApplicationDbContext(
         serviceProvider.GetRequiredService<
-            DbContextOptions<ApplicationDbContext>>()))
+            DbContextOptions<ApplicationDbContext>>(), tableStorageUri))
     {
       if (context.Movies.Any())
       {
