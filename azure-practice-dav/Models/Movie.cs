@@ -10,6 +10,6 @@ namespace Models
         [DataType(DataType.Date)]
         public DateTime ReleaseDate { get; set; }
         public string? Genre { get; set; }
-        public int Price { get; set; }
+        public decimal Price { get; set; }
     }
 }
