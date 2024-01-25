@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -14,10 +15,12 @@ namespace azure_practice_dav.Controllers
     public class MoviesController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly BlobService _blobService; 
 
-        public MoviesController(ApplicationDbContext context)
+        public MoviesController(ApplicationDbContext context, BlobService blobService)
         {
             _context = context;
+            _blobService = blobService;
         }
 
         // GET: api/Movies
@@ -102,6 +105,32 @@ namespace azure_practice_dav.Controllers
         private bool MovieExists(int id)
         {
             return _context.Movies.Any(e => e.Id == id);
+        }
+
+        [HttpPost("Upload")]
+        public async Task<ActionResult<string>> Upload(IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+            {
+                return BadRequest("File is empty or null.");
+            }
+
+            try
+            {
+                // Generate a unique filename based on timestamp
+                string fileName = $"{DateTime.UtcNow.ToString("yyyyMMddHHmmss")}_{file.FileName}";
+
+                // Upload the file to Azure Blob Storage
+                using (Stream stream = file.OpenReadStream())
+                {
+                    string blobUri = await _blobService.UploadFileAsync(fileName, stream);
+                    return Ok(blobUri);
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
         }
     }
 }
