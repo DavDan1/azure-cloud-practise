@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace MvcMovie.Models
+namespace Models
 {
     public class Movie
     {
@@ -10,6 +10,6 @@ namespace MvcMovie.Models
         [DataType(DataType.Date)]
         public DateTime ReleaseDate { get; set; }
         public string? Genre { get; set; }
-        public decimal Price { get; set; }
+        public int Price { get; set; }
     }
 }
