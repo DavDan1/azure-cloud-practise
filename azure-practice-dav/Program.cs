@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Models;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("AzureSQL") ?? throw new InvalidOperationException("Connection string 'ApplicationDbContext' not found.")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DbConnectionString") ?? throw new InvalidOperationException("Connection string 'DbConnectionString' not found.")));
 //This line adds the CORS services to the container.
 builder.Services.AddCors(); //<-- Add this line to register CORS services
 builder.Services.AddControllers();
