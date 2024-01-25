@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Models;
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<MovieContext>(options =>
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("AzureSQL") ?? throw new InvalidOperationException("Connection string 'ApplicationDbContext' not found.")));
 //This line adds the CORS services to the container.
 builder.Services.AddCors(); //<-- Add this line to register CORS services
@@ -18,7 +18,7 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
-    SeedData.Initialize(services);
+    // SeedData.Initialize(services);
 }
 // Now you can configure the CORS policy.
 app.UseCors(policy =>
